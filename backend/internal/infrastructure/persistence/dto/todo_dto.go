@@ -3,45 +3,44 @@ package dto
 import (
 	"time"
 
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/domain"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/domain"
 	"github.com/google/uuid"
 )
 
 type FindAllInput struct {
-	UserID  uuid.UUID  `json:"user_id" validate:"required"`
+	UserID uuid.UUID `json:"user_id" validate:"required"`
 }
 
 type FindByIDInput struct {
-	ID     uuid.UUID  `json:"id" validate:"required"`
-	UserID  uuid.UUID  `json:"user_id" validate:"required"`
+	ID     uuid.UUID `json:"id" validate:"required"`
+	UserID uuid.UUID `json:"user_id" validate:"required"`
 }
 
 type CreateTodoInput struct {
-	UserID uuid.UUID  `json:"user_id" validate:"required"`
-	Title   string     `json:"title" validate:"required,min=1,max=100"`
-	Content *string    `json:"content" validate:"omitempty,max=1000"`
+	UserID  uuid.UUID `json:"user_id" validate:"required"`
+	Title   string    `json:"title" validate:"required,min=1,max=100"`
+	Content *string   `json:"content" validate:"omitempty,max=1000"`
 }
 
 type UpdateTodoInput struct {
-	ID      uuid.UUID  `json:"id" validate:"required"`
-	UserID uuid.UUID  `json:"user_id" validate:"required"`
-	Title   string     `json:"title" validate:"required,min=1,max=100"`
-	Content *string    `json:"content" validate:"omitempty,max=1000"`
+	ID      uuid.UUID `json:"id" validate:"required"`
+	UserID  uuid.UUID `json:"user_id" validate:"required"`
+	Title   string    `json:"title" validate:"required,min=1,max=100"`
+	Content *string   `json:"content" validate:"omitempty,max=1000"`
 }
 
 type DeleteTodoInput struct {
-	ID     uuid.UUID  `json:"id" validate:"required"`
-	UserID uuid.UUID  `json:"user_id" validate:"required"`
+	ID     uuid.UUID `json:"id" validate:"required"`
+	UserID uuid.UUID `json:"user_id" validate:"required"`
 }
 
-
 type TodoOutput struct {
-	ID        uuid.UUID  `json:"id"`
-	UserID uuid.UUID  `json:"user_id"`
-	Title     string     `json:"title"`
-	Content   *string    `json:"content"`
-	CreatedAt time.Time  `json:"created_at"`
-	UpdatedAt time.Time  `json:"updated_at"`
+	ID        uuid.UUID `json:"id"`
+	UserID    uuid.UUID `json:"user_id"`
+	Title     string    `json:"title"`
+	Content   *string   `json:"content"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type TodoListOutput struct {

@@ -33,10 +33,10 @@ services:
       - "TZ=Asia/Tokyo" # タイムゾーンを日本時刻に設定
     image: postgres:17.2
     volumes:
-      - react-output-crud-auth-api-features:/var/lib/postgresql/data:delegated
+      - react-output-crud-auth-api-features-features:/var/lib/postgresql/data:delegated
       - ./database/postgres:/docker-entrypoint-initdb.d #初期データ
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_CONTAINER_PORT}"
 
 volumes:
-  react-output-crud-auth-api:
+  react-output-crud-auth-api-features-features:

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/errors"
+	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/errors"
 	"gorm.io/gorm"
 )
 
@@ -16,7 +16,7 @@ func HandleDBError(err error, resourceName string) error {
 	// レコードが見つからない場合
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return apperrors.NewNotFoundError(
-			resourceName + " not found",
+			resourceName+" not found",
 			err,
 		)
 	}
@@ -24,7 +24,7 @@ func HandleDBError(err error, resourceName string) error {
 	// 一意制約違反の場合
 	if isDuplicateError(err) {
 		return apperrors.NewAlreadyExistsError(
-			resourceName + " already exists",
+			resourceName+" already exists",
 			err,
 		)
 	}
@@ -32,14 +32,14 @@ func HandleDBError(err error, resourceName string) error {
 	// 外部キー制約違反の場合
 	if isForeignKeyError(err) {
 		return apperrors.NewValidationError(
-			"invalid reference in " + resourceName,
+			"invalid reference in "+resourceName,
 			err,
 		)
 	}
 
 	// その他のデータベースエラー
 	return apperrors.NewInternalError(
-		"database error occurred while processing " + resourceName,
+		"database error occurred while processing "+resourceName,
 		err,
 	)
 }
@@ -64,4 +64,4 @@ func isForeignKeyError(err error) bool {
 	errMsg := err.Error()
 	return strings.Contains(errMsg, "Error 1452: Cannot add or update a child row") || // MySQL
 		strings.Contains(errMsg, "violates foreign key constraint") // PostgreSQL
-} 
+}

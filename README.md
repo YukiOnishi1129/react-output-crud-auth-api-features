@@ -1,4 +1,4 @@
-# react-output-crud-auth-api-featrues
+# react-output-crud-auth-api-features-featrues
 
 ## 技術構成
 
@@ -140,7 +140,7 @@ password: password
 ```
 DBMS: Postgres
 host: 127.0.0.1
-database: REACT_OUTPUT_CRUD_AUTH_API_DB
+database: REACT_OUTPUT_CRUD_AUTH_API_FEATURES_DB
 user: user
 password: pass
 port: 5432
@@ -170,7 +170,7 @@ docker ps
 
 各イメージに対応する コンテナ ID を確認
 
-- バックエンド: react-output-crud-auth-api-backend
+- バックエンド: react-output-crud-auth-api-features-backend
 - DB: postgres:17.2
 
 以下のコマンドで各コンテナのログを確認

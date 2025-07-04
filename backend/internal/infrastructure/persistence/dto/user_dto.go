@@ -3,10 +3,9 @@ package dto
 import (
 	"time"
 
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/domain"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/domain"
 	"github.com/google/uuid"
 )
-
 
 type FindUserByEmailInput struct {
 	Email string `json:"email" validate:"required,email"`
@@ -20,9 +19,9 @@ type CreateUserInput struct {
 
 type UserOutput struct {
 	ID        uuid.UUID `json:"id"`
-	Name      string `json:"name"`
-	Email     string `json:"email"`
-	Password  string `json:"password"`
+	Name      string    `json:"name"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }

@@ -4,14 +4,12 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/constants"
-	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/errors"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/usecase"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/usecase/input"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/constants"
+	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/errors"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/usecase"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/usecase/input"
 	"github.com/gorilla/mux"
 )
-
-
 
 type AuthHandler interface {
 	RegisterAuthHandlers(r *mux.Router)
@@ -29,15 +27,14 @@ func NewAuthHandler(authUseCase usecase.AuthUseCase) AuthHandler {
 	return &authHandler{authUseCase: authUseCase}
 }
 
-
 func (h *authHandler) RegisterAuthHandlers(r *mux.Router) {
 	authRouter := r.PathPrefix(constants.AuthPath).Subrouter()
 	isAuthCheckRouter := r.PathPrefix(constants.AuthPath).Subrouter()
 	isAuthCheckRouter.Use(h.authMiddleware)
 
-	authRouter.HandleFunc("/login", h.Login).Methods(http.MethodPost,http.MethodOptions)
-	authRouter.HandleFunc("/signup", h.Signup).Methods(http.MethodPost,http.MethodOptions)
-	isAuthCheckRouter.HandleFunc("/authentication", h.CheckAuthentication).Methods(http.MethodPost,http.MethodOptions)
+	authRouter.HandleFunc("/login", h.Login).Methods(http.MethodPost, http.MethodOptions)
+	authRouter.HandleFunc("/signup", h.Signup).Methods(http.MethodPost, http.MethodOptions)
+	isAuthCheckRouter.HandleFunc("/authentication", h.CheckAuthentication).Methods(http.MethodPost, http.MethodOptions)
 }
 
 func (h *authHandler) Login(w http.ResponseWriter, r *http.Request) {
@@ -57,7 +54,6 @@ func (h *authHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	h.respondJSON(w, http.StatusOK, output)
 }
-
 
 func (h *authHandler) Signup(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()

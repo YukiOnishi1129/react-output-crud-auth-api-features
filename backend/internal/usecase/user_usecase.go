@@ -3,13 +3,12 @@ package usecase
 import (
 	"context"
 
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/infrastructure/persistence/dto"
-	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/errors"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/repository"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/usecase/input"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/usecase/output"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/infrastructure/persistence/dto"
+	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/errors"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/repository"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/usecase/input"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/usecase/output"
 )
-
 
 type UserUseCase interface {
 	GetUserByEmail(ctx context.Context, input *input.GetUserByEmailInput) (*output.UserOutput, error)
@@ -22,7 +21,6 @@ type useUseCase struct {
 func NewUserUseCase(userRepo repository.UserRepository) UserUseCase {
 	return &useUseCase{userRepo: userRepo}
 }
-
 
 func (u *useUseCase) GetUserByEmail(ctx context.Context, input *input.GetUserByEmailInput) (*output.UserOutput, error) {
 	if err := input.Validate(); err != nil {

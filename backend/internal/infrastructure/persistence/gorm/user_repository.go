@@ -5,11 +5,10 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/domain"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/infrastructure/persistence/dto"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/repository"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/domain"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/infrastructure/persistence/dto"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/repository"
 )
-
 
 type userRepository struct {
 	db *gorm.DB
@@ -18,7 +17,6 @@ type userRepository struct {
 func NewUserRepository(db *gorm.DB) repository.UserRepository {
 	return &userRepository{db: db}
 }
-
 
 func (r *userRepository) FindByEmail(ctx context.Context, input *dto.FindUserByEmailInput) (*dto.UserOutput, error) {
 	var user domain.User

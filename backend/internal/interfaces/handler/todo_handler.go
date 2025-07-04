@@ -7,10 +7,10 @@ import (
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/constants"
-	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/errors"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/usecase"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/usecase/input"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/constants"
+	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/errors"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/usecase"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/usecase/input"
 )
 
 type TodoHandler interface {
@@ -30,7 +30,6 @@ type todoHandler struct {
 func NewTodoHandler(todoUseCase usecase.TodoUseCase, userUseCase usecase.UserUseCase) TodoHandler {
 	return &todoHandler{todoUseCase: todoUseCase, userUseCase: userUseCase}
 }
-
 
 func (h *todoHandler) RegisterTodoHandlers(r *mux.Router) {
 	todoRouter := r.PathPrefix(constants.TodosPath).Subrouter()
@@ -198,6 +197,3 @@ func (h *todoHandler) DeleteTodo(w http.ResponseWriter, r *http.Request) {
 
 	h.respondJSON(w, http.StatusNoContent, nil)
 }
-
-
-

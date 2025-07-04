@@ -8,18 +8,16 @@ import (
 	"os"
 	"strings"
 
-	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/errors"
+	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/errors"
 	"github.com/golang-jwt/jwt/v5"
 )
 
 type BaseHandler struct{}
 
-
 type ErrorResponse struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
-
 
 type contextKey string
 
@@ -41,7 +39,6 @@ func (h *BaseHandler) respondJSON(w http.ResponseWriter, status int, payload int
 	w.WriteHeader(status)
 	w.Write(response)
 }
-
 
 // エラーレスポンスを返す共通メソッド
 func (h *BaseHandler) respondError(w http.ResponseWriter, err error) {
@@ -86,10 +83,8 @@ func (h *BaseHandler) respondError(w http.ResponseWriter, err error) {
 	json.NewEncoder(w).Encode(response)
 }
 
-
-
-func  (h *BaseHandler) authMiddleware(next http.Handler)http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
+func (h *BaseHandler) authMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		authHeader := r.Header.Get("Authorization")
 		if authHeader == "" {
 			h.respondError(w, apperrors.NewUnauthorizedError("authorization header is required", nil))
@@ -116,8 +111,7 @@ func  (h *BaseHandler) authMiddleware(next http.Handler)http.Handler {
 	})
 }
 
-
-func  (h *BaseHandler) getUserEmail(r *http.Request) string {
+func (h *BaseHandler) getUserEmail(r *http.Request) string {
 	email, ok := r.Context().Value(userContextKey).(string)
 	if !ok {
 		return ""

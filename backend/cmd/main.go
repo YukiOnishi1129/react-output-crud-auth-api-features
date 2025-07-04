@@ -8,10 +8,10 @@ import (
 
 	"github.com/rs/cors"
 
-	persistence_gorm "github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/infrastructure/persistence/gorm"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/interfaces/handler"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/database"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/usecase"
+	persistence_gorm "github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/infrastructure/persistence/gorm"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/interfaces/handler"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/database"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/usecase"
 	"github.com/gorilla/mux"
 )
 
@@ -30,7 +30,6 @@ func main() {
 	todoUsecase := usecase.NewTodoUseCase(todoRepository)
 	authHandler := handler.NewAuthHandler(authUsecase)
 	todoHandler := handler.NewTodoHandler(todoUsecase, userUsecase)
-	
 
 	authHandler.RegisterAuthHandlers(r)
 	todoHandler.RegisterTodoHandlers(r)
@@ -44,10 +43,9 @@ func main() {
 
 	handler := c.Handler(r)
 
-
 	log.Printf("Server started at http://localhost:%s", os.Getenv("BACKEND_CONTAINER_POST"))
 	if err := http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("BACKEND_CONTAINER_POST")), handler); err != nil {
 		log.Fatalf("Error starting server: %v", err)
 	}
-	
+
 }

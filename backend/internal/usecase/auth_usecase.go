@@ -3,15 +3,13 @@ package usecase
 import (
 	"context"
 
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/infrastructure/persistence/dto"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/auth"
-	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/errors"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/repository"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/usecase/input"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/usecase/output"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/infrastructure/persistence/dto"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/auth"
+	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/errors"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/repository"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/usecase/input"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/usecase/output"
 )
-
-
 
 type AuthUseCase interface {
 	Login(ctx context.Context, input *input.LoginInput) (*output.AuthOutput, error)
@@ -27,7 +25,6 @@ func NewAuthUseCase(userRepo repository.UserRepository) AuthUseCase {
 	return &authUseCase{userRepo: userRepo}
 }
 
-
 func (u *authUseCase) Login(ctx context.Context, input *input.LoginInput) (*output.AuthOutput, error) {
 	if err := input.Validate(); err != nil {
 		return nil, apperrors.NewValidationError("invalid input parameters", err)
@@ -41,7 +38,7 @@ func (u *authUseCase) Login(ctx context.Context, input *input.LoginInput) (*outp
 	}
 
 	// verify password
-	if err :=  auth.VerifyPassword(user.Password, input.Password); err != nil {
+	if err := auth.VerifyPassword(user.Password, input.Password); err != nil {
 		return nil, apperrors.NewUnauthorizedError("email or password is incorrect", err)
 	}
 
@@ -57,7 +54,6 @@ func (u *authUseCase) Login(ctx context.Context, input *input.LoginInput) (*outp
 		User:  *userOutput,
 	}, nil
 }
-
 
 func (u *authUseCase) RegisterUser(ctx context.Context, input *input.RegisterUserInput) (*output.AuthOutput, error) {
 	if err := input.Validate(); err != nil {

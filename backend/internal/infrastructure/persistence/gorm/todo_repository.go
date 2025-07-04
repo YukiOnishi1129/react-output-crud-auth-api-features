@@ -3,10 +3,10 @@ package persistence_gorm
 import (
 	"context"
 
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/domain"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/infrastructure/persistence/dto"
-	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/errors"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/repository"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/domain"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/infrastructure/persistence/dto"
+	apperrors "github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/errors"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/repository"
 	"gorm.io/gorm"
 )
 
@@ -26,12 +26,12 @@ func (r *todoRepository) FindAll(ctx context.Context, input *dto.FindAllInput) (
 	return dto.ConvertTodoListOutput(todos, int64(len(todos))), nil
 }
 
-func (r *todoRepository) FindByID(ctx context.Context, input *dto.FindByIDInput) (*dto.TodoOutput, error){
+func (r *todoRepository) FindByID(ctx context.Context, input *dto.FindByIDInput) (*dto.TodoOutput, error) {
 	var todo domain.Todo
 	if err := r.db.Where("user_id = ?", input.UserID.String()).First(&todo, "id = ?", input.ID).Error; err != nil {
 		return nil, HandleDBError(err, "todo")
 	}
-	
+
 	return dto.ConvertTodoOutput(&todo), nil
 }
 
@@ -46,7 +46,7 @@ func (r *todoRepository) Create(ctx context.Context, input *dto.CreateTodoInput)
 	return dto.ConvertTodoOutput(&todo), nil
 }
 
-func (r *todoRepository) Update(ctx context.Context, input *dto.UpdateTodoInput) (*dto.TodoOutput, error){
+func (r *todoRepository) Update(ctx context.Context, input *dto.UpdateTodoInput) (*dto.TodoOutput, error) {
 	var todo domain.Todo
 	todo.ID = input.ID
 	todo.UserID = input.UserID

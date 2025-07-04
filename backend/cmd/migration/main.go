@@ -3,11 +3,10 @@ package main
 import (
 	"log"
 
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/domain"
-	"github.com/YukiOnishi1129/react-output-crud-auth-api/backend/internal/pkg/database"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/domain"
+	"github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend/internal/pkg/database"
 	"github.com/joho/godotenv"
 )
-
 
 func main() {
 	log.Printf("Start migrate")
@@ -26,8 +25,7 @@ func main() {
 	// UUID拡張機能を有効化
 	db.Exec("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";")
 
-	db.AutoMigrate(&domain.User{},&domain.Todo{})
-	
+	db.AutoMigrate(&domain.User{}, &domain.Todo{})
 
 	log.Printf("Migration completed")
 }
