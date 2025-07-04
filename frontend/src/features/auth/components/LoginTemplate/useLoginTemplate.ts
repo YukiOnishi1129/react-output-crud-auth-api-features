@@ -10,7 +10,6 @@ import { login } from "../../apis";
 const schema = z.object({
   email: z.string().email("メールアドレスの形式で入力してください"),
   password: z.string().min(8, "8文字以上で入力してください"),
-  password_confirmation: z.string().min(8, "8文字以上で入力してください"),
 });
 
 export const useLoginTemplate = () => {
@@ -26,20 +25,12 @@ export const useLoginTemplate = () => {
     defaultValues: {
       email: "",
       password: "",
-      password_confirmation: "",
     },
   });
 
   const handleLoginSubmit = handleSubmit(
     useCallback(
       async (values: z.infer<typeof schema>) => {
-        if (values.password !== values.password_confirmation) {
-          setError("password", {
-            type: "manual",
-            message: "確認用パスワードと一致しません",
-          });
-          return;
-        }
         const { email, password } = values;
         const res = await login(email, password);
         if (res.code !== 200 || !res.data) {
