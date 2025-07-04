@@ -1,3 +1,3 @@
-import { TodoEditTemplate } from "../../components/templates";
+import { TodoEditTemplate }  from "../../features/todos/components";
 
 export const TodoEditPage = () => <TodoEditTemplate />;
