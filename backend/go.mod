@@ -1,9 +1,8 @@
-module github.com/YukiOnishi1129/react-output-crud-auth-api-features-features/backend
+module github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend
 
 go 1.23.5
 
 require (
-	github.com/YukiOnishi1129/react-output-crud-auth-api-features/backend v0.0.0-20250217045400-ffad04ac6630
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
